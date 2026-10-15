@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kuis Menganalisis Novel</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1F7;--card:#fff;--ink:#1B2347;--mut:#4F587E;--line:#C5CBE0;--acc:#B7791F;--ribbon:#E8A317;--ok:#0F7B4F;--okbg:#E3F5EC;--bad:#B3261E;--badbg:#FCE9E7;--btn:#1B2347;--btnt:#fff;--page:#FFFDF6;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1328;--card:#1A2040;--ink:#E8EBFA;--mut:#A9B1D6;--line:#343C66;--acc:#F2B544;--ribbon:#F2B544;--ok:#6FE0AB;--okbg:#12362A;--bad:#FF9A92;--badbg:#401C1A;--btn:#F2B544;--btnt:#14183A;--page:#1F2547;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1328;--card:#1A2040;--ink:#E8EBFA;--mut:#A9B1D6;--line:#343C66;--acc:#F2B544;--ribbon:#F2B544;--ok:#6FE0AB;--okbg:#12362A;--bad:#FF9A92;--badbg:#401C1A;--btn:#F2B544;--btnt:#14183A;--page:#1F2547;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Nunito Sans',system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+main{max-width:720px;margin:0 auto;padding:0 16px 48px;display:flex;flex-direction:column;gap:18px}
+h1,h2{font-family:'Lora',Georgia,serif;margin:0;line-height:1.25}
+h1{font-size:2rem;margin-top:28px}
+h2{font-size:1.15rem;font-weight:600}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0}
+.bar .t{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar .t i{display:block;height:100%;width:0;background:var(--ribbon);transition:width .3s}
+.bar p{margin:4px 0 0;font-size:.9rem;color:var(--mut)}
+label{display:block;font-weight:700;margin-bottom:4px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:130px;resize:vertical}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.page{position:relative;background:var(--page);border:2px solid var(--line);border-radius:14px;padding:22px 22px 18px;font-family:'Lora',Georgia,serif;line-height:1.75}
+.page::before{content:"";position:absolute;top:-2px;right:26px;width:22px;height:46px;background:var(--ribbon);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.page h2{margin-bottom:8px}
+.page p{margin:0 0 10px;font-style:italic}
+.card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:transparent;border:2px solid var(--line);border-radius:10px;padding:10px 14px;min-height:48px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.fb{margin:0;font-size:.95rem;padding:8px 12px;border-radius:10px}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.btn{font:inherit;font-weight:800;border:0;border-radius:10px;padding:12px 20px;min-height:48px;cursor:pointer;background:var(--btn);color:var(--btnt)}
+.btn.s{background:transparent;color:var(--ink);border:2px solid var(--line)}
+a.btn{display:inline-flex;align-items:center;text-decoration:none}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+#res h2{font-size:1.5rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Kuis Menganalisis Novel</h1>
+<p style="color:var(--mut);margin:6px 0 14px">Bahasa Indonesia Tingkat Lanjut, kelas XI. Baca cuplikan, jawab 25 soal (pilihan ganda, benar-salah, dan isian singkat), lalu tulis dua jawaban uraian.</p>
+<label for="nm">Nama</label>
+<input id="nm" autocomplete="name" placeholder="Tulis namamu">
+<label for="kl" style="margin-top:10px">Kelas</label>
+<input id="kl" placeholder="Contoh: XI IPA 2">
+</header>
+<div class="bar"><div class="t"><i id="pb"></i></div><p id="pl"></p></div>
+<article class="page">
+<h2>Menunggu Bapak</h2>
+<p>Hujan belum reda ketika Laras menutup pintu warung ibunya. Sudah tiga bulan sejak Bapak berangkat ke kota, dan sudah tiga bulan pula tak ada kabar. Setiap malam ia menghitung sisa beras di dapur, lalu pura-pura tidur ketika Ibu masuk kamar dengan mata sembab.</p>
+<p>"Kalau Bapak pulang, kita buka warung lebih pagi," kata Ibu suatu malam. Laras mengangguk, meski ia tahu Ibu sedang membujuk dirinya sendiri.</p>
+<p>Di luar, kentongan ronda berbunyi dua kali. Laras menatap jalan tanah yang becek dan berjanji dalam hati: ia tidak akan menunggu selamanya.</p>
+<small style="font-style:normal;font-family:'Nunito Sans',sans-serif;color:var(--mut)">Cuplikan novel fiktif buatan guru.</small>
+</article>
+<div id="qs" style="display:flex;flex-direction:column;gap:18px"></div>
+<section class="card">
+<h2>Jawaban uraian</h2>
+<div><label for="t0">1. Layakkah sikap Laras di akhir cuplikan diteladani? Tulis 5 sampai 7 kalimat dengan bukti dari teks.</label><textarea id="t0"></textarea></div>
+<div><label for="t1">2. Tulis ulang kalimat pembuka cuplikan dari sudut pandang orang pertama (Laras). Apa yang berubah pada efeknya?</label><textarea id="t1"></textarea></div>
+</section>
+<section class="card" id="res" hidden>
+<h2 id="rt"></h2>
+<p id="rm" style="margin:0"></p>
+<label for="ro">Rekap hasilmu (tujuan: WhatsApp guru, 085871938059)</label>
+<textarea id="ro" readonly></textarea>
+<div class="row"><a class="btn" id="wa" href="https://wa.me/6285871938059" target="_blank" rel="noopener">Kirim nilai ke WhatsApp</a><button class="btn s" id="cp" type="button">Salin hasil</button><button class="btn s" id="rs" type="button">Ulangi kuis</button></div>
+<p id="cs" role="status" style="margin:0;color:var(--mut)"></p>
+</section>
+</main>
+<script>
+var Q=[
+{q:"Tema yang paling tepat untuk cuplikan ini adalah ...",o:["Kegigihan dan harapan keluarga yang ditinggalkan","Persaingan dagang di desa","Petualangan seorang anak di kota","Persahabatan anak-anak desa"],a:0,e:"Cerita berpusat pada penantian Laras dan Ibu serta tekad untuk tidak menyerah."},
+{q:"Sudut pandang yang digunakan pengarang adalah ...",o:["Orang pertama pelaku utama","Orang ketiga terbatas, terfokus pada Laras","Orang ketiga serba tahu","Orang kedua"],a:1,e:"Narator mengetahui pikiran Laras (\"ia tahu Ibu sedang membujuk dirinya sendiri\"), tetapi tidak masuk ke pikiran Ibu."},
+{q:"Watak Ibu digambarkan terutama melalui ...",o:["Pemaparan langsung watak oleh narator (analitik)","Dialog dan tindakan, seperti mata sembab (dramatik)","Monolog batin Ibu","Komentar tokoh lain"],a:1,e:"Pengarang tidak menyebut watak Ibu secara langsung, tetapi menunjukkannya lewat ucapan dan keadaan fisiknya."},
+{q:"Tahap alur yang tampak pada cuplikan adalah ...",o:["Penyelesaian","Klimaks","Pengenalan menuju munculnya konflik","Antiklimaks"],a:2,e:"Latar dan tokoh diperkenalkan, sementara konflik batin Laras baru mulai terbentuk."},
+{q:"Suasana yang dibangun oleh hujan, malam, dan bunyi kentongan adalah ...",o:["Riang dan meriah","Muram dan cemas","Tegang karena kejar-kejaran","Khidmat dan tenang"],a:1,e:"Hujan, malam, dan jalan becek menguatkan perasaan sedih dan cemas tokoh."},
+{q:"Pengulangan frasa \"sudah tiga bulan\" berfungsi untuk ...",o:["Menegaskan lamanya penantian","Mengubah alur menjadi mundur","Menambah jumlah tokoh","Menunjukkan tokoh bingung"],a:0,e:"Repetisi menekankan betapa lama dan beratnya masa menunggu tanpa kabar."},
+{q:"Konflik utama dalam cuplikan ini adalah ...",o:["Konflik batin Laras: terus menunggu atau bangkit sendiri","Laras bertengkar dengan warga","Ibu bertengkar dengan Bapak","Laras melawan alam"],a:0,e:"Janji dalam hati Laras di akhir cuplikan menunjukkan pergulatan batinnya."},
+{q:"Amanat yang paling sesuai dengan cuplikan adalah ...",o:["Setiap anak harus merantau ke kota","Rahasia keluarga tidak boleh dibagikan","Hujan selalu membawa berkah","Harapan perlu disertai usaha, jangan menunggu selamanya"],a:3,e:"Tekad Laras menggambarkan pesan bahwa harapan harus diwujudkan dengan tindakan."},
+{q:"Yang termasuk unsur ekstrinsik novel adalah ...",o:["Tokoh dan penokohan","Latar belakang pengarang dan kondisi sosial-budaya","Alur cerita","Sudut pandang"],a:1,e:"Unsur ekstrinsik berada di luar teks tetapi memengaruhi karya."},
+{q:"Bagian evaluasi dalam ulasan novel berisi ...",o:["Ringkasan seluruh isi cerita","Biodata pengarang","Kekuatan dan kelemahan novel disertai bukti","Identitas buku saja"],a:2,e:"Evaluasi menilai novel dengan alasan dan bukti, bukan sekadar menceritakan ulang."},
+{q:"Benar atau salah: kalimat 'Kalau Bapak pulang, kita buka warung lebih pagi' menunjukkan Ibu yakin penuh bahwa Bapak segera pulang.",o:["Benar","Salah"],a:1,e:"Salah. Kalimat berandai itu dibaca Laras sebagai cara Ibu membujuk dirinya sendiri, bukan tanda yakin."},
+{q:"Benar atau salah: alur mundur tidak mungkin dipakai bersama alur maju dalam satu novel.",o:["Benar","Salah"],a:1,e:"Salah. Novel sering memakai alur campuran, yaitu gabungan alur maju dan sorot balik."},
+{q:"Benar atau salah: latar dalam novel mencakup tempat, waktu, dan suasana.",o:["Benar","Salah"],a:0,e:"Benar. Ketiganya membentuk latar cerita."},
+{q:"Benar atau salah: novel Bumi Manusia karya Pramoedya Ananta Toer berlatar masa kolonial.",o:["Benar","Salah"],a:0,e:"Benar. Ceritanya berlatar masa kolonial Belanda di Hindia Belanda."},
+{q:"Benar atau salah: tema dan amanat sama saja sehingga tidak perlu dibedakan.",o:["Benar","Salah"],a:1,e:"Salah. Tema adalah gagasan pokok, sedangkan amanat adalah pesan yang dipetik pembaca."},
+{q:"Kalimat 'Ombak berkejaran di tepi pantai' mengandung majas ...",o:["Hiperbola","Litotes","Personifikasi","Ironi"],a:2,e:"Ombak (benda mati) diberi sifat manusia, yaitu berkejaran."},
+{q:"Alur yang menceritakan kembali peristiwa masa lalu disebut ...",o:["Alur maju","Alur sorot balik (flashback)","Alur lurus","Alur klimaks"],a:1,e:"Alur sorot balik menghadirkan kembali peristiwa yang sudah terjadi."},
+{q:"Tokoh yang wataknya berkembang dari awal sampai akhir cerita disebut tokoh ...",o:["Datar (statis)","Bulat (dinamis)","Pembantu","Antagonis"],a:1,e:"Tokoh bulat mengalami perubahan watak seiring konflik yang dihadapinya."},
+{q:"Kata 'meskipun' pada kalimat 'Laras mengangguk, meskipun ia ragu' menyatakan hubungan ...",o:["Sebab","Syarat","Tujuan","Pertentangan (konsesif)"],a:3,e:"Kata 'meskipun' menghubungkan dua hal yang berlawanan."},
+{q:"Susunan ulasan novel yang tepat adalah ...",o:["Orientasi, tafsiran, evaluasi, rangkuman","Pengenalan, konflik, klimaks, penyelesaian","Tesis, argumen, penegasan ulang","Judul, sinopsis, daftar tokoh"],a:0,e:"Ulasan dimulai dari orientasi, lalu tafsiran isi, evaluasi, dan ditutup rangkuman."},
+{q:"Nilai moral dalam novel adalah ...",o:["Nilai ujian yang diperoleh pembaca","Kebiasaan adat satu daerah saja","Ajaran tentang baik buruk perilaku manusia","Aturan penulisan ejaan"],a:2,e:"Nilai moral berkaitan dengan baik buruknya sikap dan perbuatan manusia."},
+{q:"Isian singkat: siapa nama tokoh utama dalam cuplikan 'Menunggu Bapak'?",t:"isi",k:["laras"],e:"Cerita terfokus pada Laras."},
+{q:"Isian singkat: unsur yang mencakup tempat, waktu, dan suasana disebut ...",t:"isi",k:["latar","setting"],e:"Latar adalah keterangan tempat, waktu, dan suasana cerita."},
+{q:"Isian singkat: tahap alur ketika konflik mencapai puncak disebut ...",t:"isi",k:["klimaks"],e:"Klimaks adalah titik puncak ketegangan konflik."},
+{q:"Isian singkat: pesan yang dapat dipetik pembaca dari sebuah cerita disebut ...",t:"isi",k:["amanat"],e:"Amanat adalah pesan moral yang ingin disampaikan pengarang."}
+];
+var S={name:"",kelas:"",a:{},t:["",""]},$=function(i){return document.getElementById(i)};
+try{var r=localStorage.getItem("kuisNovel");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+function save(){try{localStorage.setItem("kuisNovel",JSON.stringify(S))}catch(e){}}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function norm(x){return String(x||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function good(i){var q=Q[i],v=S.a[i];if(v===undefined)return false;if(q.t==="isi"){v=norm(v);return q.k.some(function(k){return v.indexOf(norm(k))>-1})}return v===q.a}
+function score(){var s=0;Q.forEach(function(q,i){if(good(i))s++});return s}
+function mk(i){
+var q=Q[i],c=el("section","card"),h=el("h2","",(i+1)+". "+q.q),done=S.a[i]!==undefined;
+c.appendChild(h);
+if(q.t==="isi"){
+var inp=el("input");inp.placeholder="Ketik jawabanmu";inp.setAttribute("aria-label","Jawaban soal "+(i+1));
+if(done){inp.value=S.a[i];inp.disabled=true}
+c.appendChild(inp);
+if(!done){var bt=el("button","btn","Periksa jawaban");bt.type="button";bt.onclick=function(){var v=inp.value.trim();if(!v){inp.focus();return}S.a[i]=v;save();c.replaceWith(mk(i));upd()};c.appendChild(bt)}
+else{var ok2=good(i),f2=el("p","fb "+(ok2?"ok":"bad"),(ok2?"Benar. ":"Belum tepat. Jawaban yang diharapkan: "+q.k[0]+". ")+q.e);f2.setAttribute("role","status");c.appendChild(f2)}
+return c}
+q.o.forEach(function(o,j){
+var b=el("button","opt",String.fromCharCode(65+j)+". "+o+(done&&j===q.a?"  ✓":done&&j===S.a[i]?"  ✗":""));
+b.type="button";
+if(done){b.disabled=true;if(j===q.a)b.className+=" ok";else if(j===S.a[i])b.className+=" bad"}
+b.onclick=function(){S.a[i]=j;save();c.replaceWith(mk(i));upd()};
+c.appendChild(b)});
+if(done){var ok=S.a[i]===q.a,f=el("p","fb "+(ok?"ok":"bad"),(ok?"Benar. ":"Belum tepat. ")+q.e);f.setAttribute("role","status");c.appendChild(f)}
+return c}
+var GURU_WA="6285871938059";
+function wrong(){var w=[];Q.forEach(function(q,i){if(!good(i))w.push(i+1)});return w.length?w.join(", "):"tidak ada"}
+function cut(t){t=(t||"").trim()||"-";return t.length>350?t.slice(0,350)+"... (dipotong)":t}
+function text(c){var a=c?cut(S.t[0]):(S.t[0]||"-"),b=c?cut(S.t[1]):(S.t[1]||"-");return "Hasil Kuis Novel\nNama: "+(S.name||"-")+"\nKelas: "+(S.kelas||"-")+"\nNilai: "+Math.round(score()/Q.length*100)+" dari 100 ("+score()+"/"+Q.length+" benar)\nNomor soal salah: "+wrong()+"\n\nUraian 1:\n"+a+"\n\nUraian 2:\n"+b}
+function upd(){
+var n=Object.keys(S.a).length;
+$("pb").style.width=(n/Q.length*100)+"%";
+$("pl").textContent=n+" dari "+Q.length+" soal terjawab";
+var res=$("res");res.hidden=n<Q.length;
+if(n===Q.length){var s=score();
+$("rt").textContent="Nilai akhir "+Math.round(s/Q.length*100)+" dari 100 ("+s+" dari "+Q.length+" soal benar)";
+$("rm").textContent=s/Q.length>=.9?"Analisismu sangat tajam. Lanjutkan ke uraian dan proyek ulasan.":s/Q.length>=.7?"Pemahamanmu sudah baik. Baca lagi penjelasan pada soal yang belum tepat.":"Baca ulang cuplikan, lalu pelajari penjelasan tiap soal dan coba lagi.";
+$("ro").value=text()}}
+function init(){
+var qs=$("qs");qs.textContent="";Q.forEach(function(_,i){qs.appendChild(mk(i))});
+$("nm").value=S.name;$("kl").value=S.kelas;$("t0").value=S.t[0];$("t1").value=S.t[1];upd()}
+$("kl").oninput=function(){S.kelas=this.value;save();$("ro").value=text()};
+$("nm").oninput=function(){S.name=this.value;save();$("ro").value=text()};
+["t0","t1"].forEach(function(id,i){$(id).oninput=function(){S.t[i]=this.value;save();$("ro").value=text()}});
+$("cp").onclick=function(){
+var o=$("ro"),m=$("cs");o.value=text();
+function fail(){o.focus();o.select();m.textContent="Tekan Salin (Ctrl+C) pada teks yang sudah terpilih."}
+try{navigator.clipboard.writeText(o.value).then(function(){m.textContent="Hasil tersalin."},fail)}catch(e){fail()}};
+$("wa").onclick=function(e){if(!(S.name||"").trim()||!(S.kelas||"").trim()){e.preventDefault();$("cs").textContent="Isi nama dan kelasmu di bagian atas dulu, lalu kirim lagi.";($("nm").value.trim()?$("kl"):$("nm")).focus();return}this.href="https://wa.me/"+GURU_WA+"?text="+encodeURIComponent(text(1));$("cs").textContent="WhatsApp terbuka. Tekan kirim di sana untuk mengumpulkan nilaimu. Jika tidak terbuka, tekan Salin hasil lalu kirim manual ke 085871938059."};
+$("rs").onclick=function(){S.a={};save();init();window.scrollTo(0,0)};
+init();
+</script>
+</body>
+</html>
